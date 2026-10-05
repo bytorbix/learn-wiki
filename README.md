@@ -70,6 +70,11 @@ Early (v0.1). Not built yet: syncing the wiki across devices.
 
 Inspired by [VibeWise](https://github.com/nykooi1/vibe-wise) by Noah Kim.
 
+## Privacy
+
+Everything stays in local Markdown files; the plugin sends nothing anywhere.
+See [PRIVACY.md](PRIVACY.md).
+
 ## License
 
 [MIT](LICENSE)

@@ -1,9 +1,15 @@
 {
   "name": "learn-wiki",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Learning-first development with a global, agent-maintained wiki of what you know.",
   "author": { "name": "bytorbix" },
+  "homepage": "https://github.com/bytorbix/learn-wiki",
   "repository": "https://github.com/bytorbix/learn-wiki",
   "license": "MIT",
-  "keywords": ["learning", "wiki", "knowledge-map"]
+  "keywords": ["learning", "wiki", "knowledge-map"],
+  "icon": "./assets/icon.png",
+  "documentationUrl": "https://github.com/bytorbix/learn-wiki#readme",
+  "supportUrl": "https://github.com/bytorbix/learn-wiki/issues",
+  "privacyPolicyUrl": "https://github.com/bytorbix/learn-wiki/blob/master/PRIVACY.md",
+  "termsOfServiceUrl": "https://github.com/bytorbix/learn-wiki/blob/master/LICENSE"
 }
