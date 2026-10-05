@@ -167,9 +167,17 @@ Sync drone telemetry to video frames and write matched records per flight.
 | `chosen` | The learner confirmed it at a checkpoint; not necessarily built |
 | `chosen (tentative)` | The learner chose **Go with it for now**; revisit later |
 | `proposed` | Suggested, not agreed |
+| `proposed (delegated)` | The learner asked Claude to decide; Claude chose it. Not the learner's decision; revisit when it matters |
 | `?` | Unknown or undecided |
 
 Rules:
+
+- A status is **exactly** one value from this table. No extra words in the
+  status column ("implemented (Claude's design)" is wrong). Who decided what
+  goes in `## Decisions`.
+- Decision lines are always `<date> · <status> · <decision>. <revisit note>`.
+  A component can be `implemented` while the decision behind it is
+  `proposed (delegated)`.
 
 - Only a learner's confirmation makes something `chosen`. Claude's suggestions
   stay `proposed` until then.

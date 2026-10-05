@@ -46,8 +46,10 @@ Find `.learning/` using repo-format §2.
 About the project only; everything about the learner comes from the wiki. Ask
 one picker at a time and wait for each answer.
 
-1. **What are we doing?** New project / Existing repo / Continuing
-   (an existing repo the learner already knows).
+1. **What are we doing?** First glance at the project folder. If it already has
+   source code, say so and offer only Existing repo / Continuing (an existing
+   repo the learner already knows). Offer New project only when there's no
+   code yet.
 2. **How much do you want to study here?**
    - Deep: reason through every meaningful decision
    - Balanced: major decisions
