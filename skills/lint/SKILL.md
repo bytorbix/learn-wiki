@@ -29,6 +29,7 @@ what it says the learner knows.
 | Check | Fix |
 | --- | --- |
 | A required section or frontmatter field is missing | Add it (`None.` for empty sections) |
+| `## Counts` uses the old format (`strong folded: N · exposure: N` on one line) | Split it into the current format (spec §3.4). Give the exposure total to the dimension whose level is `exposed` with 0 sessions; if that's unclear, give it to `understanding` and report it |
 | A tag has no `domains/<tag>.md` | Create it with defaults (spec §3.3) |
 | A `Related:` link points to a concept that doesn't exist | Remove that link |
 | An alias is just the slug with spaces or different case (`hls streaming` on `hls-streaming`) | Remove it |
@@ -83,7 +84,8 @@ Keep the entry with more evidence as A. Then:
 2. **Open gaps** and **Resolved gaps:** keep every line from both.
 3. **Key evidence:** per dimension, keep the earliest strong line as *first*
    and the newest as *latest*. Fold any other strong lines into `strong folded`.
-4. **Counts:** add the session counts, `strong folded`, and `exposure`; union
+4. **Counts:** add the session and exposure counts per dimension, and
+   `strong folded`; union
    the project lists.
 5. **Levels:** recompute with the level-from-state table.
 6. **Related:** union, minus A and B themselves.

@@ -164,7 +164,8 @@ Related: [[hls-streaming]], [[interpolation]], [[clock-drift]]
 
 ## Counts
 sessions: understanding 2 · practical 1
-strong folded: 2 · exposure: 2
+exposure: understanding 2 · practical 0
+strong folded: 2
 projects: sample-app, demo-service
 ```
 
@@ -174,6 +175,8 @@ projects: sample-app, demo-service
 - `Counts` holds everything that was folded away, plus the number of sessions
   with strong evidence per dimension. Levels are raised from `sessions`, so it
   must survive pruning.
+- `sessions` and `exposure` are counted **per dimension**, so a level can always
+  be recomputed from the entry alone (§5, level from state).
 - `projects` lists every project with **any** evidence for this concept
   (strong, gap, or exposure): where the concept came up, not only where it went well.
 
@@ -313,7 +316,7 @@ a level must be recomputed without replaying evidence (lint, merges):
 | 2 or more | no | `solid` |
 | 2 or more | yes | `shaky` |
 | 1 | either | `shaky` |
-| 0 | gap or exposure evidence exists | `exposed` |
+| 0 | an open gap or `exposure` count in this dimension | `exposed` |
 | 0 | nothing | `none` |
 
 - An open gap is resolved by later `strong` evidence that addresses the same
@@ -332,7 +335,7 @@ lines of evidence no matter how long it's been used.
 | First strong evidence (per dimension) | Full line in `Key evidence` |
 | Latest strong evidence (per dimension) | Full line in `Key evidence`, replaced by newer |
 | Other strong evidence | Folded into `Counts` with project names |
-| Exposure | Folded into `Counts` |
+| Exposure | Folded into `Counts`, per dimension |
 
 ## 7. Concepts
 

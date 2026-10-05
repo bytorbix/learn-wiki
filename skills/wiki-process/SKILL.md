@@ -48,7 +48,7 @@ Read the entry. Apply its lines in date order.
 
 **exposure**
 
-- Add 1 to `exposure` in `## Counts`.
+- Add 1 to that dimension's `exposure` in `## Counts`.
 - If that dimension is `none`, set it to `exposed`.
 
 **gap**

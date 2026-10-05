@@ -106,7 +106,14 @@ Write `<wiki>/concepts/<topic>/<slug>.md` using the template in spec §3.4, with
 - `understanding: none` and `practical: none`
 - `created:` and `updated:` set to today
 - every section present with the line `None.`
-- `## Counts` set to `strong: 0 · exposure: 0`
+- `## Counts` set to:
+
+  ```text
+  sessions: understanding 0 · practical 0
+  exposure: understanding 0 · practical 0
+  strong folded: 0
+  projects: None.
+  ```
 
 Report **created**.
 
