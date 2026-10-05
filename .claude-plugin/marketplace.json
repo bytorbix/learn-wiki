@@ -1,0 +1,12 @@
+{
+  "name": "learn-wiki",
+  "owner": { "name": "bytorbix" },
+  "description": "The learn-wiki plugin: learning-first development with a wiki of what you know.",
+  "plugins": [
+    {
+      "name": "learn-wiki",
+      "source": "./",
+      "description": "Learning-first development with a global, agent-maintained wiki of what you know."
+    }
+  ]
+}

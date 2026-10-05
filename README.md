@@ -21,7 +21,18 @@ code — and a personal wiki remembers what you actually know, across every proj
          └────────── pitches teaching at your level ◄───┘
 ```
 
-## Install (from source)
+## Install
+
+In Claude Code, add the marketplace, then install the plugin:
+
+```text
+/plugin marketplace add bytorbix/learn-wiki
+/plugin install learn-wiki@learn-wiki
+```
+
+Restart Claude Code, then run `/learn-wiki:wiki-onboarding` once.
+
+Or load it from a clone for one session:
 
 ```bash
 git clone https://github.com/bytorbix/learn-wiki.git
