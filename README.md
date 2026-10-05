@@ -1,3 +1,5 @@
+![learn-wiki: You design. Claude codes. Your wiki remembers what you actually know.](assets/banner.svg)
+
 # learn-wiki
 
 A Claude Code plugin for learning while you build. You design, Claude writes the
