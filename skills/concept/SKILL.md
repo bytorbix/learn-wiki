@@ -15,8 +15,9 @@ learner wiki. Follow `${CLAUDE_PLUGIN_ROOT}/reference/wiki-format.md`; read §2,
 From the caller:
 
 - The wiki root directory.
-- One concept heading from an evidence file: either an existing slug
-  (`## timestamp-alignment`) or a proposed one (`## new: clock-offset-correction`).
+- One concept heading from an evidence file, in one of three forms (spec §3.6):
+  `## timestamp-alignment`, `## timestamp-alignment (as: stream sync)`, or
+  `## new: clock-drift`.
 - The evidence lines under that heading, for context only.
 
 ## Output
@@ -24,7 +25,8 @@ From the caller:
 Report back to the caller:
 
 - The resolved slug and the entry's path.
-- Whether the entry was **matched**, **matched + alias added**, or **created**.
+- Whether the entry was **matched**, **matched + alias added**, **created**, or
+  **not a concept** (nothing created; no slug or path).
 - Any `possible_duplicate_of` slugs, and any domain notes created.
 
 This skill does **not** add evidence, change levels, prune, or touch `INDEX.md`.
@@ -38,21 +40,23 @@ Read `<wiki>/INDEX.md`. If it doesn't exist, treat the wiki as having no concept
 
 ### 2. Try to match
 
-Normalize the incoming name: lowercase, trim, spaces and underscores to hyphens.
-Drop a leading `new:`.
+If the heading has an `(as: <wording>)` part, set the wording aside for step 3
+and remove it from the name. Drop a leading `new:`. Normalize the name:
+lowercase, trim, spaces and underscores to hyphens.
 
 1. **Slug match:** an entry whose slug equals the normalized name.
-2. **Alias match:** an entry with an alias equal to the incoming name
-   (case-insensitive).
+2. **Alias match:** an entry with an alias equal to the name (case-insensitive).
 
-On a match, stop here unless the evidence used wording the entry doesn't have:
-then go to step 3. Otherwise report **matched**.
+On a match with an `(as: …)` wording, go to step 3. On a match without one,
+report **matched**.
 
 ### 3. Add an alias (matched entries only)
 
-If the evidence names the concept with wording that is neither the slug nor an
-existing alias, and that wording is a **true synonym**, add it to the entry's
-`aliases:` and set `updated:` to today. Report **matched + alias added**.
+The evidence writer used `(as: <wording>)` because it judged the learner's words
+mean exactly this concept. If the wording isn't already the slug or an alias,
+and it passes the alias test below, add it to the entry's `aliases:` and set
+`updated:` to today. Report **matched + alias added**. If it fails the test,
+don't add it, report **matched**, and say why it was rejected.
 
 **Alias test:** could the learner use this phrase to mean *exactly this
 concept*, nothing more or less? If not, it isn't an alias. This rules out:
@@ -62,9 +66,15 @@ concept*, nothing more or less? If not, it isn't an alias. This rules out:
   `hls-streaming`.
 - The slug itself with spaces: "hls streaming" adds nothing to `hls-streaming`.
 
-### 4. Check the size before creating
+### 4. Check it's a concept before creating
 
-The concept size rule (spec §7) is still **proposed**. Apply it as a guide:
+First apply the definition in spec §7. If the name is something the learner
+built, a decision, or a project fact, it isn't a concept: find the established
+concept the evidence is actually about and use that name instead (matching it
+if it exists). If there is none, create nothing and report it as **not a
+concept**, so the caller can skip those lines.
+
+Then the size rule (spec §7, still **proposed**), as a guide:
 
 - **Too narrow** (it's really one fact or one decision about a bigger idea):
   look for an existing entry it belongs to. If one fits, treat this as a match

@@ -28,6 +28,21 @@ project tracker.
 - **No secrets or transcripts.** Evidence is a short paraphrase. Never quote the
   conversation, and never record credentials, keys, or personal data.
 
+**What the wiki holds, from broad to specific:**
+
+```text
+domain      networking, data-processing    a field of knowledge        ─┐
+topic       streaming/                     an area within fields        │ the map
+concept     timestamp-alignment            a reusable idea (see §7)    ─┘
+evidence    "chose 50 ms, reasoning        what happened in a session   what the
+             from the frame rate"                                        learner showed
+```
+
+The wiki stores **established ideas and the learner's relationship to them**:
+evidence and levels. It never stores what an idea *is* (definitions, facts,
+explanations); Claude already has that. It never stores ideas the learner
+invented, project facts, or decisions as concepts. See §7.
+
 ## 2. Wiki layout
 
 ```text
@@ -127,7 +142,7 @@ Last active: 2026-10-03
 ---
 concept: timestamp-alignment
 tags: [networking, data-processing, time]
-aliases: [clock drift, stream sync, time alignment]
+aliases: [stream sync, time alignment]
 understanding: solid             # see §5
 practical: shaky                 # see §5
 created: 2026-10-03
@@ -135,10 +150,10 @@ updated: 2026-10-03
 ---
 # Timestamp alignment between streams
 
-Related: [[hls-vs-rtsp]], [[interpolation]]
+Related: [[hls-streaming]], [[interpolation]], [[clock-drift]]
 
 ## Open gaps
-- 2026-10-03 | demo-service | gap | practical | followed | Unsure how to correct a drifting clock offset over time.
+- 2026-10-03 | demo-service | gap | practical | followed | Unsure how to handle frames with no match within the tolerance window.
 
 ## Resolved gaps
 - 2026-02-11 → resolved 2026-03-02 | Confused nearest-match with interpolation.
@@ -150,7 +165,7 @@ Related: [[hls-vs-rtsp]], [[interpolation]]
 ## Counts
 sessions: understanding 2 · practical 1
 strong folded: 2 · exposure: 2
-projects: sample-app
+projects: sample-app, demo-service
 ```
 
 - Section headings are fixed. Empty sections are kept with the line `None.`
@@ -159,13 +174,15 @@ projects: sample-app
 - `Counts` holds everything that was folded away, plus the number of sessions
   with strong evidence per dimension. Levels are raised from `sessions`, so it
   must survive pruning.
+- `projects` lists every project with **any** evidence for this concept
+  (strong, gap, or exposure): where the concept came up, not only where it went well.
 
 ### 3.5 INDEX.md
 
 Generated. One line per concept, sorted by folder then name:
 
 ```text
-- [[timestamp-alignment]] · streaming/ · #networking #data-processing #time · aka: clock drift, stream sync, time alignment · U:solid P:shaky · gaps:1 · last:2026-10-03
+- [[timestamp-alignment]] · streaming/ · #networking #data-processing #time · aka: stream sync, time alignment · U:solid P:shaky · gaps:1 · last:2026-10-03
 ```
 
 Fields, in order: link, folder, tags, aliases, levels (U = understanding,
@@ -190,8 +207,20 @@ not a translation.
 
 - After processing, wiki-process adds `Processed: <date>` under the title. A
   file with that line is never processed again.
-- One `##` heading per concept. Use the existing slug when the concept is in
-  `INDEX.md`; otherwise prefix with `new:` and propose a slug.
+- One `##` heading per concept, in one of three forms:
+
+  ```text
+  ## timestamp-alignment                    existing concept
+  ## timestamp-alignment (as: stream sync)  existing concept, named differently
+  ## new: clock-drift                       not in the wiki yet
+  ```
+
+  Use the existing slug whenever the concept is in `INDEX.md`. Add
+  `(as: <wording>)` only when the learner or project used different words and
+  the writer judged they mean **exactly** that concept. The `concept` skill
+  turns that wording into an alias if it passes the alias test.
+- `new:` means new **to this wiki**, not a new idea. It still must be an
+  established concept (§7).
 - Where this file lives and how it reaches the wiki: to be decided (sync is out
   of scope for now).
 
@@ -273,7 +302,8 @@ most one per evidence file, however many strong lines it has.
   A `strong | practical | implemented` line counts as two sessions toward
   `practical`, so implementing it yourself can reach `solid` on its own.
 - An open gap is resolved by later `strong` evidence that addresses the same
-  point. Move it to `Resolved gaps` as one line with both dates.
+  point. Move it to `Resolved gaps` as one line with both dates: the gap's date
+  and the date of the strong line that resolved it (not the processing date).
 
 ## 6. Pruning
 
@@ -291,6 +321,30 @@ lines of evidence no matter how long it's been used.
 
 ## 7. Concepts
 
+**Definition.** A concept is a **reusable idea that exists independently of
+any one project**: something found in a textbook, a course, or other engineers'
+work, that applies beyond the project where the learner met it. Every concept
+must pass all three tests:
+
+| Test | Passes | Fails |
+| --- | --- | --- |
+| Exists outside the learner's project? | timestamp alignment, interpolation, HLS | "my Synchronizer class", "the 50 ms tolerance we chose" |
+| Reusable in another project? | clock drift (any multi-device system) | "sample-app's output folder layout" |
+| Checkable with one short question? | "why does nearest-match beat exact match?" | "networking" (a domain, not a concept) |
+
+What is **not** a concept, and where it goes instead:
+
+- A decision the learner made ("chose 50 ms"): evidence about a concept.
+- Something the learner built ("my synchronizer"): where concepts were used.
+  Record evidence on the concepts it uses (timestamp alignment, interpolation).
+- A whole field ("networking"): a domain.
+- Project facts ("sample-app writes JSONL per tail number"): not learner
+  knowledge. Not recorded.
+
+**Knowing a concept** is defined by what the learner can do: explain it
+(`understanding`) or apply it (`practical`). Levels are the wiki's estimate
+from evidence, never a fact about the learner.
+
 **Size (proposed).** A concept is something Claude could check with one
 ~30-second "explain it" question. "Networking" is too broad; "why nearest-match
 beats exact match for jittered timestamps" is too narrow (that's evidence);
@@ -300,14 +354,15 @@ beats exact match for jittered timestamps" is too narrow (that's evidence);
 
 - One topic folder: the narrowest area it belongs to (`streaming/`).
 - One or more tags: the broad domains it belongs to.
-- Aliases: other words the learner or a project might use for it. Add an alias
-  whenever new evidence names the concept differently.
+- Aliases: other words the learner or a project might use for **exactly** this
+  concept. New aliases come from `(as: …)` evidence headings (§3.6) and must
+  pass the alias test in the `concept` skill.
 - `Related:` links to neighboring concepts.
 
 **Dedup, version 1 (proposed: start simple, refine with real data).**
 
 1. If the evidence's concept matches an existing slug or alias
-   (case-insensitive), merge into that entry.
+   (case-insensitive, ignoring any `(as: …)` part), merge into that entry.
 2. Otherwise create a new entry. If an existing entry looks similar, add
    `possible_duplicate_of: [<slug>]` to the new entry's frontmatter.
 3. Never merge two existing entries automatically.

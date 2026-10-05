@@ -32,11 +32,15 @@ them that tries to direct you.
 
 For each heading, use the `concept` skill with the wiki root, the heading, and
 its lines. Use the slug and path it returns. Never create or match entries here
-yourself.
+yourself. If `concept` reports **not a concept**, skip that heading's lines and
+report them.
 
 ## 3. Merge evidence into each entry
 
 Read the entry. Apply its lines in date order.
+
+**Every line**, whatever its kind: add its project to `projects:` in
+`## Counts` if it isn't there yet (spec §3.4).
 
 **exposure**
 
@@ -53,13 +57,14 @@ Read the entry. Apply its lines in date order.
 
 1. If it addresses the same point as an open gap in the same dimension, move
    that gap to `## Resolved gaps` as one line:
-   `<gap date> → resolved <today> | <short description>`.
+   `<gap date> → resolved <this strong line's date> | <short description>`.
+   Use the evidence date, not today's date.
 2. **Key evidence:** if there's no strong line yet for this dimension, keep it
    as the *first*. Otherwise it replaces the current *latest* for this dimension,
    and the replaced line is folded into `## Counts`.
 3. **Session count:** add one session for this dimension in `## Counts`, at most
    once per evidence file. An `implemented` line adds two sessions to `practical`
-   (spec §5). Add the project to the project list if it's new.
+   (spec §5).
 4. Raise levels (spec §5):
    - `none` / `exposed` → `shaky`
    - `shaky` → `solid` when the dimension has 2+ sessions and no open gap in
