@@ -186,7 +186,15 @@ approval gate. Update the map: verified components become `implemented`.
 Keep `project-map.md` current (repo-format §5): confirmed choices as `chosen`,
 tentative ones with when to revisit, Claude's suggestions as `proposed`,
 choices the learner handed to Claude as `proposed (delegated)`, unknowns as
-`?`. Use only the exact statuses in repo-format §5. Never fill a `?` with your own design. When a tentative
+`?`. Use only the exact statuses in repo-format §5, and write every decision
+in exactly this form:
+
+```text
+- 2026-10-05 · chosen · Skip invalid rows with one warning each. Revisit if partial averages mislead.
+```
+
+Date, then status, then the decision, separated by ` · `. Approved proposed
+additions are `chosen` like the rest of the design. Never fill a `?` with your own design. When a tentative
 decision's revisit moment arrives, bring it up. At milestones, a short
 `✦ System check` connects the pieces with a small diagram of the real system.
 

@@ -35,6 +35,7 @@ Requires Python 3 for the session hook.
 | `/learn-wiki:wiki-onboarding` | Once, ever: creates your wiki (where it lives, your experience, interests) |
 | `/learn-wiki:learn` | In any project: turns on learning mode; short project onboarding the first time |
 | `/learn-wiki:wiki-process <evidence-file>` | Merges a session's evidence into the wiki (`/learn` also does this for past sessions) |
+| `/learn-wiki:lint` | Now and then: fixes format drift, and asks before merging duplicate concepts or removing bad aliases |
 
 While learning, just talk normally. You can say "pause learning", "be stricter
 here", "go deeper on networking", or "just implement it" at any time.
@@ -50,8 +51,7 @@ Both are plain Markdown. The specs are in [`reference/`](reference/).
 
 ## Status
 
-Early (v0.1). Not built yet: syncing the wiki across devices, and a lint pass
-for duplicate concepts.
+Early (v0.1). Not built yet: syncing the wiki across devices.
 
 ## Credits
 

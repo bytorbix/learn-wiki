@@ -304,6 +304,18 @@ most one per evidence file, however many strong lines it has.
   sessions**, and no open gap in that dimension **(proposed default)**.
   A `strong | practical | implemented` line counts as two sessions toward
   `practical`, so implementing it yourself can reach `solid` on its own.
+**Level from state.** The rules above always give the same result as this
+formula, applied per dimension from the entry's current state. Use it whenever
+a level must be recomputed without replaying evidence (lint, merges):
+
+| Sessions in `## Counts` | Open gap in this dimension? | Level |
+| --- | --- | --- |
+| 2 or more | no | `solid` |
+| 2 or more | yes | `shaky` |
+| 1 | either | `shaky` |
+| 0 | gap or exposure evidence exists | `exposed` |
+| 0 | nothing | `none` |
+
 - An open gap is resolved by later `strong` evidence that addresses the same
   point. Move it to `Resolved gaps` as one line with both dates: the gap's date
   and the date of the strong line that resolved it (not the processing date).
