@@ -64,7 +64,9 @@ Create the layout from spec §2:
 - `profile.md` (spec §3.1): overall experience, code, checkpoints, the brief
   study preferences, and top interests as `[[tag]]` links in the learner's order.
 - `study-preferences.md` (spec §3.2): the four headings, filled from step 3.4.
-  Write `Not specified` under headings with no answer.
+  Write `Not specified` under headings with no answer. It holds only **how to
+  teach** (explanations, questions, diagrams, pace). Never repeat checkpoints
+  or who writes code here; those live only in `profile.md`.
 - `domains/<tag>.md` for each interest (spec §3.3): `depth: normal`, no
   `checkpoints` override, `starting_experience: <answer> (self-reported)`,
   `How to teach me here` set to `None.`, and an empty generated `## Summary`.

@@ -91,6 +91,8 @@ Free-form, but grouped under these headings:
 ```
 
 Read only when the brief in `profile.md` isn't enough for the situation.
+Holds only how to teach. Settings (checkpoints, who writes code) live in
+`profile.md` and are never repeated here.
 
 ### 3.3 Domain note — `domains/<tag>.md`
 
@@ -239,6 +241,9 @@ Rules:
 
 - Record only what actually happened in the session. Never infer reasoning the
   learner didn't state.
+- Write summaries without pronouns for the learner: "Wrote the interpolator and
+  fixed an off-by-one", not "He wrote...". The wiki doesn't know how the learner
+  identifies.
 - `strong` is never paired with `followed`. If the learner only followed, the
   kind is `exposure`.
 - Clicking a confirmation option is not evidence of understanding.

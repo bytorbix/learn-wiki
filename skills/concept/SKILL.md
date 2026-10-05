@@ -54,8 +54,13 @@ If the evidence names the concept with wording that is neither the slug nor an
 existing alias, and that wording is a **true synonym**, add it to the entry's
 `aliases:` and set `updated:` to today. Report **matched + alias added**.
 
-Do not add an alias for a sub-detail of the concept. "jittered timestamps" is a
-detail of `timestamp-alignment`, not another name for it.
+**Alias test:** could the learner use this phrase to mean *exactly this
+concept*, nothing more or less? If not, it isn't an alias. This rules out:
+
+- Sub-details: "jittered timestamps" is a detail of `timestamp-alignment`.
+- Comparisons: "hls vs rtsp" is about two things, not another name for
+  `hls-streaming`.
+- The slug itself with spaces: "hls streaming" adds nothing to `hls-streaming`.
 
 ### 4. Check the size before creating
 
@@ -79,7 +84,8 @@ Choose, in this order:
 3. **Tags:** one or more broad domains. Reuse existing domain tags (from
    `INDEX.md` and `domains/`) before inventing new ones.
 4. **Aliases:** the original wording from the evidence if it differs from the
-   slug, plus any obvious synonyms. Keep it short.
+   slug, plus any obvious synonyms. Every alias must pass the alias test in
+   step 3. Keep it short.
 5. **Related:** up to 3 links to existing entries that are closely related.
 6. **Similar entries:** if an existing entry looks like it could be the same
    idea but didn't match in step 2, add `possible_duplicate_of: [<slug>]`.
