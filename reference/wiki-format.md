@@ -42,7 +42,9 @@ project tracker.
       <concept>.md              one concept entry
 ```
 
-- `<wiki>` location: to be decided.
+- `<wiki>` location: chosen by the learner during wiki-onboarding (default
+  `~/.learn-wiki`). Its absolute path is the only line of
+  `${CLAUDE_PLUGIN_DATA}/wiki-path`; every skill reads it from there.
 - Every concept lives in exactly one topic folder.
 - Every tag used by a concept has a matching `domains/<tag>.md`.
 - File and folder names are lowercase kebab-case: `timestamp-alignment.md`.
@@ -144,13 +146,17 @@ Related: [[hls-vs-rtsp]], [[interpolation]]
 - 2026-10-03 | sample-app | strong | practical | designed | Latest: sketched the matching loop and its edge cases before implementation.
 
 ## Counts
-strong: 4 (sample-app) · exposure: 2
+sessions: understanding 2 · practical 1
+strong folded: 2 · exposure: 2
+projects: sample-app
 ```
 
 - Section headings are fixed. Empty sections are kept with the line `None.`
 - `Key evidence` holds at most the **first** and **latest** strong evidence per
   dimension (see §6).
-- `Counts` holds everything that was folded away.
+- `Counts` holds everything that was folded away, plus the number of sessions
+  with strong evidence per dimension. Levels are raised from `sessions`, so it
+  must survive pruning.
 
 ### 3.5 INDEX.md
 
@@ -180,6 +186,8 @@ not a translation.
 - 2026-10-03 | sample-app | gap | understanding | followed | Didn't know what NTP offset measures.
 ```
 
+- After processing, wiki-process adds `Processed: <date>` under the title. A
+  file with that line is never processed again.
 - One `##` heading per concept. Use the existing slug when the concept is in
   `INDEX.md`; otherwise prefix with `new:` and propose a slug.
 - Where this file lives and how it reaches the wiki: to be decided (sync is out
@@ -246,6 +254,9 @@ Each concept has two independent levels: `understanding` and `practical`.
 | `exposed` | Only exposure evidence |
 | `shaky` | Some strong evidence, or strong evidence with an open gap |
 | `solid` | Strong evidence across sessions and no open gap in this dimension |
+
+A **session** is one evidence file. A dimension's session count goes up by at
+most one per evidence file, however many strong lines it has.
 
 **Lower fast, raise slowly.**
 
