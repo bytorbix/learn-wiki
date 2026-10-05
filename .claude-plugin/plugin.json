@@ -4,5 +4,6 @@
   "description": "Learning-first development with a global, agent-maintained wiki of what you know.",
   "author": { "name": "bytorbix" },
   "repository": "https://github.com/bytorbix/learn-wiki",
+  "license": "MIT",
   "keywords": ["learning", "wiki", "knowledge-map"]
 }

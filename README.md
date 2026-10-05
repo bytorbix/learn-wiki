@@ -56,3 +56,7 @@ Early (v0.1). Not built yet: syncing the wiki across devices.
 ## Credits
 
 Inspired by [VibeWise](https://github.com/nykooi1/vibe-wise) by Noah Kim.
+
+## License
+
+[MIT](LICENSE)
