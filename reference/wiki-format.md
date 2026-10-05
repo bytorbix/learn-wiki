@@ -294,8 +294,11 @@ most one per evidence file, however many strong lines it has.
 
 **Lower fast, raise slowly.**
 
-- One new `gap` in a dimension lowers that dimension by one level (minimum
-  `exposed`), and adds the gap to `Open gaps`.
+- One new `gap` in a dimension lowers that dimension by one level and adds the
+  gap to `Open gaps`, but never below what the evidence supports: never below
+  `shaky` if the dimension has any strong session, and never below `exposed`.
+  A gap can't erase strong evidence the learner actually showed, and the order
+  of lines in a file doesn't change the result.
 - `none`/`exposed` → `shaky`: one `strong` in that dimension.
 - `shaky` → `solid`: `strong` evidence in that dimension from **2+ separate
   sessions**, and no open gap in that dimension **(proposed default)**.
